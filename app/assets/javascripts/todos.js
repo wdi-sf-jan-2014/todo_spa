@@ -90,10 +90,10 @@ $(function() {
     };
     $.ajax({
       url: this.urls.update.path + item.id,
-      type: this.urls.updat.method,
+      type: this.urls.update.method,
       data: data
     }).done(callback);
-    return this;
+
   };
 
   App.deleteItem = function(item, callback) {
