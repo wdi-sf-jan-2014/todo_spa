@@ -129,7 +129,7 @@ $(function(){
         if(event.target.name === "completed"){
           var view = this;
           var todo =  _this.findModel(id);
-          console.log(todo)
+          console.log(todo);
           todo.completed = !todo.completed;
 
           // UPDATE ITEM
