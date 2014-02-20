@@ -66,17 +66,19 @@ $(function(){
 
 
     App.updateItem = function(item, callback){
-      var data = { todo: item };
-      $.ajax( { url: this.urls.update.path + item.id, 
+      var params = { todo: item };
+      $.ajax( { url: this.urls.update.path + item.id + ".json", 
                 type: this.urls.update.method,
-                data: data  } ).done(callback);
+                data: params  } ).done(callback);
       return this;
     };
 
     App.deleteItem = function(item, callback){
-    	// DO SOMETHING HERE
-      // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      var params = { todo: item };
+      $.ajax( { url: this.urls.destroy.path + item.id + ".json", 
+                type: this.urls.destroy.method,
+                data: params  } ).done(callback);
+      return this;
     };
     
    	App.models = todos;
@@ -85,16 +87,16 @@ $(function(){
       var model;
       $.each(this.models, function(index, item){
           if(item.id === id){
-              console.log("found",item)
+              console.log("found",item);
              model = item;
           }
       });
-      console.log(model)
+      console.log(model);
       return model;
     };
 
     App.removeModel = function(todo){
-      var index = this.models.indexOf(todo)
+      var index = this.models.indexOf(todo);
       this.models.splice(index,1);
     };
 
@@ -140,7 +142,7 @@ $(function(){
           var view = this;
           var todo =  _this.findModel(id);
           // DELETE ITEM
-          _this.deleteItem(id, function(){
+          _this.deleteItem(todo, function(){
             _this.removeModel(todo)
             console.log(_this.models)
             $(view).remove();
