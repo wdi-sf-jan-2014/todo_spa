@@ -6,7 +6,7 @@ $(function(){
    
     App.setTemp = function(name){
         this.tempName = name;
-       	this.temp = HandlebarsTemplates[this.tempName];
+        this.temp = HandlebarsTemplates[this.tempName];
        
         return this;
     };
@@ -16,7 +16,6 @@ $(function(){
         this.$target = $(sel);
         return this;
     };
-    
     
     App.make = function(item){
         this.$el = $(this.temp(item));
@@ -30,7 +29,8 @@ $(function(){
 
     App.use = function(targetSel, tempSel){
         return this.setTarget(targetSel).setTemp(tempSel);
-     };
+    };
+
     App.render = function(item){
       this.make(item).append();
       return this;
@@ -39,7 +39,7 @@ $(function(){
     App.doThis = function(fn){
         fn.apply(App);
         return this;
-     };
+    };
 
     App.urls = {
       index : { path : '/todos.json', method : 'get' },
@@ -64,39 +64,40 @@ $(function(){
       return this;      
     };
 
-
     App.updateItem = function(item, callback){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      $.ajax({ url : this.urls.update.path + item.id,
+               type : this.urls.update.method}).done(callback());
+              
     };
 
     App.deleteItem = function(item, callback){
-    	// DO SOMETHING HERE
+      // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      $.ajax({ url : this.urls.destroy.path + item.id,
+               type : this.urls.destroy.method}).done(callback());
     };
     
-   	App.models = todos;
+    App.models = todos;
 
     App.findModel = function(id){
       var model;
       $.each(this.models, function(index, item){
           if(item.id === id){
-              console.log("found",item)
+              console.log("found",item);
              model = item;
           }
       });
-      console.log(model)
+      console.log(model);
       return model;
     };
 
     App.removeModel = function(todo){
-      var index = this.models.indexOf(todo)
+      var index = this.models.indexOf(todo);
       this.models.splice(index,1);
     };
 
-   
     // Eventhandler for adding todos
     App.doThis(function(){
        var _this = this;
@@ -114,7 +115,6 @@ $(function(){
       });
     });
 
-
     // Eventhandler for changing todos
     App.doThis(function(){
        var _this = this;
@@ -125,27 +125,29 @@ $(function(){
         if(event.target.name === "completed"){
           var view = this;
           var todo =  _this.findModel(id);
-          console.log(todo)
+          console.log(todo);
           todo.completed = !todo.completed;
 
           // UPDATE ITEM
           _this.updateItem(todo, function(){
-            $(view).toggleClass("done-true");
-          });
-        }
+              $(view).toggleClass("done-true");
+              console.log(_this.models);
+            });
+        };
 
         if(event.target.id === "removeTodo"){
           var view = this;
           var todo =  _this.findModel(id);
           // DELETE ITEM
-          _this.deleteItem(id, function(){
-            _this.removeModel(todo)
-            console.log(_this.models)
+          _this.deleteItem(todo, function(){
+            _this.removeModel(todo);
+            console.log(_this.models);
             $(view).remove();
-          })
-        }
+          });
+        };
       });
     });
+    
 
     App.doThis(function() {
       var _this = this;
@@ -157,5 +159,4 @@ $(function(){
         }
       });
     });
-
-});
+  });
