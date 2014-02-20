@@ -28,8 +28,8 @@ class TodosController < ApplicationController
   # Fill in update
   def update
     @todo = Todo.find(params[:id])
-    todo_update = params.require(:todo).permit(:completed)
-    @todos.update_attributes(todo_update)
+    todo_update = params.require(:todo).permit(:id, :completed)
+    @todo.update_attributes(todo_update)
     respond_to do |f|
       f.json {render :json => @todo, :status => 200}
     end
