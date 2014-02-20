@@ -4,9 +4,9 @@ $(function(){
 
     var App = {};
    
-    App.setTemp = function(name){
-        this.tempName = name;
-       	this.temp = HandlebarsTemplates[this.tempName];
+    App.setTemplate = function(name){
+        this.templateName = name;
+        this.template = HandlebarsTemplates[this.templateName];
        
         return this;
     };
@@ -19,7 +19,7 @@ $(function(){
     
     
     App.make = function(item){
-        this.$el = $(this.temp(item));
+        this.$el = $(this.template(item));
         return this;
     };
     
@@ -28,8 +28,8 @@ $(function(){
         return this;
     };
 
-    App.use = function(targetSel, tempSel){
-        return this.setTarget(targetSel).setTemp(tempSel);
+    App.use = function(targetSel, templateSel){
+        return this.setTarget(targetSel).setTemplate(templateSel);
      };
     App.render = function(item){
       this.make(item).append();
@@ -72,27 +72,27 @@ $(function(){
     };
 
     App.deleteItem = function(item, callback){
-    	// DO SOMETHING HERE
+      // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
       callback();
     };
     
-   	App.models = todos;
+    App.models = todos;
 
     App.findModel = function(id){
       var model;
       $.each(this.models, function(index, item){
           if(item.id === id){
-              console.log("found",item)
+              console.log("found",item);
              model = item;
           }
       });
-      console.log(model)
+      console.log(model);
       return model;
     };
 
     App.removeModel = function(todo){
-      var index = this.models.indexOf(todo)
+      var index = this.models.indexOf(todo);
       this.models.splice(index,1);
     };
 
@@ -125,7 +125,7 @@ $(function(){
         if(event.target.name === "completed"){
           var view = this;
           var todo =  _this.findModel(id);
-          console.log(todo)
+          console.log(todo);
           todo.completed = !todo.completed;
 
           // UPDATE ITEM
@@ -135,14 +135,14 @@ $(function(){
         }
 
         if(event.target.id === "removeTodo"){
-          var view = this;
-          var todo =  _this.findModel(id);
+          var viewDelete = this;
+          var todoDelete =  _this.findModel(id);
           // DELETE ITEM
           _this.deleteItem(id, function(){
-            _this.removeModel(todo)
-            console.log(_this.models)
-            $(view).remove();
-          })
+            _this.removeModel(todoDelete);
+            console.log(_this.models);
+            $(viewDelete).remove();
+          });
         }
       });
     });

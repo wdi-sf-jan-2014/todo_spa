@@ -18,6 +18,9 @@ class TodosController < ApplicationController
 
   # Fill in destroy
   def destroy
+    respond_to do |f|
+      puts("************* reaching delete json request.")
+    end
   end
 
   # Fill in update
