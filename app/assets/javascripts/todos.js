@@ -66,27 +66,29 @@ $(function(){
 
 
     App.updateItem = function(item, callback){
-      // DO SOMETHING HERE
-      // NOTE: For the url, an id for the item must be added to the path
-      // var data = { todo : item };
-      //   $.ajax({ url : this.urls.destroys.path+item,
-      //   type : this.urls.destroys.method,
-      //   data : data
-      // return this;
-      //callback();
-
+    //   // DO SOMETHING HERE
+    //   // NOTE: For the url, an id for the item must be added to the path
+      var data = { todo : item };
+      $.ajax({
+              url : this.urls.update.path+item.id,
+              type : this.urls.update.method,
+              data : data
+      }).done(callback);
+      return this;
     };
 
     App.deleteItem = function(item, callback){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
       //callback();
+      var data = { todo : item };
       $.ajax({
-          type: "POST",
-          url: this.urls.destroy.path+item,
-          dataType: "json",
-          data: {"_method":"delete"},
-        });
+          type : "POST",
+          url : this.urls.destroy.path+item,
+          dataType : "json",
+          data : data,
+          }).done(callback);
+      return this;
       //callback();
     };
     
