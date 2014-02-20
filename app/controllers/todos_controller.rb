@@ -21,7 +21,7 @@ class TodosController < ApplicationController
     id = params[:id]
     todo = Todo.find(id)
     todo.destroy
-    resond_to do |f|
+    respond_to do |f|
       f.json {render :json => {status: 200}}
     end
   end
