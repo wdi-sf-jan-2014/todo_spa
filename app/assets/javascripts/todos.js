@@ -6,7 +6,7 @@ $(function(){
    
     App.setTemp = function(name){
         this.tempName = name;
-       	this.temp = HandlebarsTemplates[this.tempName];
+        this.temp = HandlebarsTemplates[this.tempName];
        
         return this;
     };
@@ -46,8 +46,8 @@ $(function(){
       create : { path : '/todos.json', method : 'post' },
 
       // An id must be added to the todos path
-      update : { path : '/todos/', method : 'patch' },
-      destroy : { path : '/todos/', method : 'delete' } 
+      update : { path : '/todos/', method : 'patch'},
+      destroy : { path : '/todos/', method : 'delete'} 
     };
     
     App.saveItem = function(item, callback){
@@ -66,33 +66,39 @@ $(function(){
 
 
     App.updateItem = function(item, callback){
-      // DO SOMETHING HERE
-      // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      var data = { todo : item };
+      $.ajax({url: this.urls.update.path+data.todo.id,
+              type: this.urls.update.method,
+              data: data
+            }).done(callback);
+      return this;
     };
 
     App.deleteItem = function(item, callback){
-    	// DO SOMETHING HERE
-      // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      var data = { todo : item };
+      $.ajax({url: this.urls.destroy.path+ data.todo,
+              type: this.urls.destroy.method
+              }).done(callback);
+      return this;
+      
     };
     
-   	App.models = todos;
+    App.models = todos;
 
     App.findModel = function(id){
       var model;
       $.each(this.models, function(index, item){
           if(item.id === id){
-              console.log("found",item)
+              console.log("found",item);
              model = item;
           }
       });
-      console.log(model)
+      console.log(model);
       return model;
     };
 
     App.removeModel = function(todo){
-      var index = this.models.indexOf(todo)
+      var index = this.models.indexOf(todo);
       this.models.splice(index,1);
     };
 
@@ -125,7 +131,7 @@ $(function(){
         if(event.target.name === "completed"){
           var view = this;
           var todo =  _this.findModel(id);
-          console.log(todo)
+          console.log(todo);
           todo.completed = !todo.completed;
 
           // UPDATE ITEM
@@ -139,10 +145,10 @@ $(function(){
           var todo =  _this.findModel(id);
           // DELETE ITEM
           _this.deleteItem(id, function(){
-            _this.removeModel(todo)
-            console.log(_this.models)
+            _this.removeModel(todo);
+            console.log(_this.models);
             $(view).remove();
-          })
+          });
         }
       });
     });
