@@ -64,17 +64,24 @@ $(function(){
       return this;      
     };
 
-
     App.updateItem = function(item, callback){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      var data = { todo : item };
+      $.ajax({ url : this.urls.update.path+item.id,
+               type : this.urls.update.method,
+               data : data}).done(callback);
+      return this;
     };
 
     App.deleteItem = function(item, callback){
     	// DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      var data = { todo : item };
+      $.ajax({ url : this.urls.destroy.path+item,
+               type : this.urls.destroy.method,
+               data : data}).done(callback);
+      return this;
     };
     
    	App.models = todos;
@@ -96,7 +103,6 @@ $(function(){
       this.models.splice(index,1);
     };
 
-   
     // Eventhandler for adding todos
     App.doThis(function(){
        var _this = this;
@@ -113,7 +119,6 @@ $(function(){
         this.reset();
       });
     });
-
 
     // Eventhandler for changing todos
     App.doThis(function(){
