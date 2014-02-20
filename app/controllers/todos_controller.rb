@@ -32,7 +32,11 @@ class TodosController < ApplicationController
   def update
     id = params.require(:id)
     @todo = Todo.find(id)
-    @todo.update_attribute(:completed, true)
+    if @todo.completed == true
+      @todo.update_attribute(:completed, false)
+    else
+      @todo.update_attribute(:completed, true)
+    end
 
     respond_to do |f|
       f.html { redirect_to :todos }
