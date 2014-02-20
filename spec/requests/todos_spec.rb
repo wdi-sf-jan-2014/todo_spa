@@ -46,12 +46,12 @@ describe "Todos" do
       expect{Todo.find(@todo.id)}.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
-
+ 
   describe "PATCH /todos/:id" do
     before do
       @todo = Todo.create!(title: "test todo", completed: false)
     end
-    let(:data) { {completed: true} }
+    let(:data){ {todo: {completed: true} }}
     it "should allow the caller to update the completed attribute on the todo" do
       patch "/todos/#{@todo.id}.json", data
       response.status.should == 200
