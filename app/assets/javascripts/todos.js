@@ -31,6 +31,7 @@ $(function(){
     App.use = function(targetSel, tempSel){
         return this.setTarget(targetSel).setTemp(tempSel);
      };
+     
     App.render = function(item){
       this.make(item).append();
       return this;
@@ -46,7 +47,7 @@ $(function(){
       create : { path : '/todos.json', method : 'post' },
 
       // An id must be added to the todos path
-      update : { path : '/todos/', method : 'patch' },
+      update : { path : '/todos/', method : 'patch'},
       destroy : { path : '/todos/', method : 'delete' } 
     };
     
@@ -66,15 +67,21 @@ $(function(){
 
 
     App.updateItem = function(item, callback){
-      // DO SOMETHING HERE
+      var data = { todo : item };
+      $.ajax({ url : this.urls.update.path + item.id, 
+              type : this.urls.update.method, 
+              data : data}).done(callback);
+      return this;
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
     };
 
     App.deleteItem = function(item, callback){
-    	// DO SOMETHING HERE
-      // NOTE: For the url, an id for the item must be added to the path
-      callback();
+
+      var data = { todo : item };
+    	$.ajax({ url : this.urls.destroy.path + item, // no need for item.id because item is an int
+               type : this.urls.destroy.method }).done(callback);
+
+      // NOTE: For the url, an id for the item must be added to the pat
     };
     
    	App.models = todos;
@@ -87,7 +94,7 @@ $(function(){
              model = item;
           }
       });
-      console.log(model)
+      
       return model;
     };
 
