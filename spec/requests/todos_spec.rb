@@ -7,7 +7,7 @@ describe "Todos" do
       response.status.should == 200
     end
   end
- 
+
   describe "GET /todos" do
     it "should be successful" do
       get todos_path
