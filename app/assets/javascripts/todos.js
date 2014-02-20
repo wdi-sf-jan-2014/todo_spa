@@ -53,7 +53,7 @@ $(function() {
 
         // An id must be added to the todos path
         update: {
-            path: '/todos/:id.json',
+            path: '/todos/',
             method: 'patch'
         },
         destroy: {
@@ -87,9 +87,8 @@ $(function() {
         var data = {
             todo: item
         };
-
         $.ajax({
-            url: this.urls.update.path,
+            url: this.urls.update.path + item.id + '.json',
             type: this.urls.update.method,
             data: data
         }).done(callback());
