@@ -6,8 +6,7 @@ $(function(){
    
     App.setTemp = function(name){
         this.tempName = name;
-       	this.temp = HandlebarsTemplates[this.tempName];
-       
+       	this.temp = HandlebarsTemplates[this.tempName];    
         return this;
     };
 
@@ -15,8 +14,7 @@ $(function(){
         this.target =  sel;
         this.$target = $(sel);
         return this;
-    };
-    
+    };   
     
     App.make = function(item){
         this.$el = $(this.temp(item));
@@ -46,7 +44,7 @@ $(function(){
       create : { path : '/todos.json', method : 'post' },
 
       // An id must be added to the todos path
-      update : { path : '/todos/', method : 'patch' },
+      update : { path : '/todos/:id.json', method : 'patch' },
       destroy : { path : '/todos/', method : 'delete' } 
     };
     
@@ -64,17 +62,23 @@ $(function(){
       return this;      
     };
 
-
     App.updateItem = function(item, callback){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
       callback();
     };
 
-    App.deleteItem = function(item, callback){
+    App.deleteItem = function(item, callback){    
     	// DO SOMETHING HERE
+
+      var deleteID = $("#todos").
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      var data = { todo : item };
+      $.ajax({ 
+        url : this.urls.destroy.path + $(this).attr( "data-id" ),
+        type : this.urls.destroy.method,
+        data : data}).done(callback);
+      return this;
     };
     
    	App.models = todos;
@@ -83,7 +87,6 @@ $(function(){
       var model;
       $.each(this.models, function(index, item){
           if(item.id === id){
-              console.log("found",item)
              model = item;
           }
       });
