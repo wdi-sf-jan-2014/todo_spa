@@ -68,7 +68,7 @@ $(function(){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
       var data = { todo : item };
-      $.ajax({ url : this.urls.update.path + item.id + ".json",
+      $.ajax({ url : this.urls.update.path+item.id,
                type : this.urls.update.method,
                data : data}).done(callback);
       return this;
@@ -78,7 +78,7 @@ $(function(){
     	// DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
       var data = { todo : item };
-      $.ajax({ url : this.urls.destroy.path + item.id + ".json",
+      $.ajax({ url : this.urls.destroy.path+item,
                type : this.urls.destroy.method,
                data : data}).done(callback);
       return this;
@@ -103,7 +103,6 @@ $(function(){
       this.models.splice(index,1);
     };
 
-   
     // Eventhandler for adding todos
     App.doThis(function(){
        var _this = this;
@@ -120,7 +119,6 @@ $(function(){
         this.reset();
       });
     });
-
 
     // Eventhandler for changing todos
     App.doThis(function(){
@@ -145,7 +143,7 @@ $(function(){
           var view = this;
           var todo =  _this.findModel(id);
           // DELETE ITEM
-          _this.deleteItem(todo, function(){
+          _this.deleteItem(id, function(){
             _this.removeModel(todo)
             console.log(_this.models)
             $(view).remove();
