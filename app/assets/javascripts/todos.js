@@ -135,7 +135,7 @@ $(function(){
       if(event.target.name === "completed"){
         var view = this;
         var todo =  _this.findModel(id);
-        console.log(todo);
+        console.log({todo: todo});
         todo.completed = !todo.completed;
         $(view).find('input:checkbox').toggleClass('animated pulse');
 

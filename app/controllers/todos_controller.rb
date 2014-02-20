@@ -22,7 +22,7 @@ class TodosController < ApplicationController
     @todo.destroy
 
     respond_to do |f|
-
+      # what json exactly should I be rendering?
       f.json { render :json => @todo, only: [:id, :title, :completed]}
     end
   end
@@ -34,10 +34,10 @@ class TodosController < ApplicationController
     todo_params = params.require(:todo).permit(:completed)
     @todo.update(todo_params)
 
-  respond_to do |f|
+    respond_to do |f|
 
-    f.json { render :json => @todos, only: [:id, :title, :completed]}
-  end
+      f.json { render :json => @todos, only: [:id, :title, :completed]}
+    end
 
   end
 end
