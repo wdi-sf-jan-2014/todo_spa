@@ -68,14 +68,15 @@ $(function(){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
       $.ajax({ url : this.urls.update.path + item.id,
-                     type : this.urls.update.method}).done(callback);
+               type : this.urls.update.method}).done(callback);
               
     };
 
     App.deleteItem = function(item, callback){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      $.ajax({ url : this.urls.destroy.path + item.id,
+               type : this.urls.destroy.method}).done(callback);
     };
     
     App.models = todos;
@@ -138,7 +139,7 @@ $(function(){
           var view = this;
           var todo =  _this.findModel(id);
           // DELETE ITEM
-          _this.deleteItem(id, function(){
+          _this.deleteItem(todo, function(){
             _this.removeModel(todo);
             console.log(_this.models);
             $(view).remove();
