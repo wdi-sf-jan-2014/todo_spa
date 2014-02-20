@@ -25,7 +25,9 @@ class TodosController < ApplicationController
     end
   end
 
-  # Fill in update
   def update
+    @todo = Todo.find(params[:id])
+    @todo.update(completed: params[:completed]) 
+    render json: @todo
   end
 end
