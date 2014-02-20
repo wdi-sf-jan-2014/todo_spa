@@ -68,7 +68,7 @@ $(function(){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
       $.ajax({ url : this.urls.update.path + item.id,
-               type : this.urls.update.method}).done(callback);
+               type : this.urls.update.method}).done(callback());
               
     };
 
@@ -76,7 +76,7 @@ $(function(){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
       $.ajax({ url : this.urls.destroy.path + item.id,
-               type : this.urls.destroy.method}).done(callback);
+               type : this.urls.destroy.method}).done(callback());
     };
     
     App.models = todos;
