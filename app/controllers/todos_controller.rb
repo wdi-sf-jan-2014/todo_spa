@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   def index
-    @todos = Todo.all
+    @todos = Todo.all.sort
     respond_to do |f|
       f.html
       f.json { render :json => @todos, only: [:id, :title, :completed]}
