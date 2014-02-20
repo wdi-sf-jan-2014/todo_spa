@@ -11,3 +11,12 @@
  *= require_self
  *= require_tree .
  */
+
+.task-title {
+  display: inline-block;
+}
+
+.todo {
+  padding: 15px;
+}
+
