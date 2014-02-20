@@ -18,9 +18,22 @@ class TodosController < ApplicationController
 
   # Fill in destroy
   def destroy
+    @todo = Todo.find(params[:id])
+    @todo.destroy
+    respond_to do |f|
+      f.html { render :index }
+      f.json { render :json => @todo, only: [:id, :title, :completed] }
+    end
   end
 
   # Fill in update
   def update
+    todo = Todo.find(params[:id])
+    updated_params = params.require(:todo).permit(:title, :completed)
+    todo.update_attributes(updated_params)
+    respond_to do |f|
+      f.html { render :index }
+      f.json { render :json => @todo, only: [:id, :title, :completed] }
+    end
   end
 end
