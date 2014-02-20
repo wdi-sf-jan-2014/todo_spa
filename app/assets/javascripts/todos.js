@@ -93,6 +93,7 @@ $(function() {
       type: this.urls.updat.method,
       data: data
     }).done(callback);
+    return this;
   };
 
   App.deleteItem = function(item, callback) {
@@ -155,7 +156,6 @@ $(function() {
       if (event.target.name === "completed") {
         var view = this;
         var todo = _this.findModel(id);
-        console.log(todo);
         todo.completed = !todo.completed;
 
         // UPDATE ITEM
@@ -165,13 +165,12 @@ $(function() {
       }
 
       if (event.target.id === "removeTodo") {
-        var view = this;
-        var todo = _this.findModel(id);
+        var view_to_remove = this;
+        var todo_to_remove = _this.findModel(id);
         // DELETE ITEM
         _this.deleteItem(id, function() {
-          _this.removeModel(todo);
-          console.log(_this.models);
-          $(view).remove();
+          _this.removeModel(todo_to_remove);
+          $(view_to_remove).remove();
         });
       }
     });
