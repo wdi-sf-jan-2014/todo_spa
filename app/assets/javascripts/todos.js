@@ -46,8 +46,8 @@ $(function(){
       create : { path : '/todos.json', method : 'post' },
 
       // An id must be added to the todos path
-      update : { path : '/todos/:id.json', method : 'patch' },
-      destroy : { path : '/todos/:id.json', method : 'delete' } 
+      update : { path : '/todos/', method : 'patch' },
+      destroy : { path : '/todos/', method : 'delete' } 
     };
     
     App.saveItem = function(item, callback){
@@ -67,7 +67,7 @@ $(function(){
 
     App.updateItem = function(item, callback){
       var data = { todo : item };
-       $.ajax({url : this.urls.update.path,
+       $.ajax({url : this.urls.update.path+ item.id +".json",
               type : this.urls.update.method,
               data : data}).done(callback);    
       return this; 
@@ -75,7 +75,7 @@ $(function(){
 
     App.deleteItem = function(item, callback){
     	var data = { todo : item };
-       $.ajax({url : this.urls.destroy.path,
+       $.ajax({url : this.urls.destroy.path + item +".json",
               type : this.urls.destroy.method,
               data : data}).done(callback);    
       return this; 
