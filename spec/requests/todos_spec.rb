@@ -46,7 +46,7 @@ describe "Todos" do
       expect{Todo.find(@todo.id)}.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
-
+  
   describe "PATCH /todos/:id" do
     before do
       @todo = Todo.create!(title: "test todo", completed: false)
