@@ -33,6 +33,8 @@ describe "Todos" do
       todo.completed.should == true
 
       JSON.parse(response.body)["id"].should == todo.id
+      JSON.parse(response.body)["title"].should == todo.title
+      JSON.parse(response.body)["completed"].should == todo.completed
     end
   end
 
