@@ -55,6 +55,7 @@ describe "Todos" do
     it "should allow the caller to update the completed attribute on the todo" do
       patch "/todos/#{@todo.id}.json", data
       response.status.should == 200
+      @todo.completed.should == false
 
       # Getting the updated attributes from the database
       @todo.reload
