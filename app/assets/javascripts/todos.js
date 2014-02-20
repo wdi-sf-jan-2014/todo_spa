@@ -67,7 +67,7 @@ $(function(){
     App.updateItem = function(item, callback){
       // NOTE: For the url, an id for the item must be added to the path
       // -in this case the id is passed in as part of the full object, item (todo)
-      var data = { todo : item };
+      var data = { todo : {completed : item.completed } };
       $.ajax({  url : this.urls.update.path + item.id + ".json",
                 type : this.urls.update.method,
                 data : data}).done(callback);
