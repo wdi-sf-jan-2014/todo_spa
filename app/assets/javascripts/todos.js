@@ -68,7 +68,7 @@ $(function(){
     App.updateItem = function(item, callback){
       var data = {todo : item};
       $.ajax({ url : this.urls.update.path+item.id+'.json',
-               type : this.urls.update.method,
+               method : this.urls.update.method,
                data : data}).done(callback);
       // NOTE: For the url, an id for the item must be added to the path
     };
@@ -76,7 +76,7 @@ $(function(){
     App.deleteItem = function(item, callback){
       var data = {todo : item};
       $.ajax({url : this.urls.destroy.path+item,
-              type : this.urls.destroy.method,
+              method : this.urls.destroy.method,
               data :data}).done(callback);
       // NOTE: For the url, an id for the item must be added to the path
     };
