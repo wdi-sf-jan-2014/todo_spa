@@ -3,12 +3,12 @@ $(function(){
     var todos = [];
 
     var App = {};
-   
+
     App.setTemp = function(name){
-        this.tempName = name;
-       	this.temp = HandlebarsTemplates[this.tempName];
-       
-        return this;
+      this.tempName = name;
+      this.temp = HandlebarsTemplates[this.tempName];
+
+      return this;
     };
 
     App.setTarget = function(sel){
@@ -16,13 +16,13 @@ $(function(){
         this.$target = $(sel);
         return this;
     };
-    
-    
+
+
     App.make = function(item){
         this.$el = $(this.temp(item));
         return this;
     };
-    
+
     App.append = function(){
         this.$target.append(this.$el);
         return this;
@@ -35,21 +35,22 @@ $(function(){
       this.make(item).append();
       return this;
     };
-    
+
     App.doThis = function(fn){
         fn.apply(App);
         return this;
      };
 
     App.urls = {
+
       index : { path : '/todos.json', method : 'get' },
       create : { path : '/todos.json', method : 'post' },
 
       // An id must be added to the todos path
       update : { path : '/todos/', method : 'patch' },
-      destroy : { path : '/todos/', method : 'delete' } 
+      destroy : { path : '/todos/', method : 'delete' }
     };
-    
+
     App.saveItem = function(item, callback){
       var data = { todo : item };
       $.ajax({ url : this.urls.create.path,
@@ -61,49 +62,54 @@ $(function(){
     App.getItems = function(callback){
       $.ajax({url : this.urls.index.path,
               type : this.urls.index.method}).done(callback);
-      return this;      
+      return this;
     };
 
 
     App.updateItem = function(item, callback){
-      // DO SOMETHING HERE
-      // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      var data = { todo: item };
+      $.ajax({url: this.urls.update.path + item.id + '.json',
+              type: this.urls.update.method,
+              data: data
+      }).done(callback);
     };
 
     App.deleteItem = function(item, callback){
-    	// DO SOMETHING HERE
-      // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      var data = { todo: item };
+
+      $.ajax({url: this.urls.destroy.path + item + '.json',
+              type: this.urls.destroy.method,
+              data: data
+      }).done(callback);
     };
-    
-   	App.models = todos;
+
+    App.models = todos;
 
     App.findModel = function(id){
       var model;
       $.each(this.models, function(index, item){
           if(item.id === id){
-              console.log("found",item)
+              console.log("found",item);
              model = item;
           }
       });
-      console.log(model)
+      console.log(model);
       return model;
     };
 
     App.removeModel = function(todo){
-      var index = this.models.indexOf(todo)
+      var index = this.models.indexOf(todo);
       this.models.splice(index,1);
     };
 
-   
+
     // Eventhandler for adding todos
     App.doThis(function(){
        var _this = this;
-      
+
        $("#addTodo").on("submit", function(event){
         event.preventDefault();
-        
+
         var newTodo = {completed: false};
         newTodo.title = $("#todo_title").val();
         _this.saveItem(newTodo, function(data){
@@ -118,14 +124,14 @@ $(function(){
     // Eventhandler for changing todos
     App.doThis(function(){
        var _this = this;
-      
+
       // event for CLICK CHECKBOX
       $("#todos").on("click", ".todo", function(event){
         var id = Number(this.dataset.id);
         if(event.target.name === "completed"){
           var view = this;
           var todo =  _this.findModel(id);
-          console.log(todo)
+          console.log(todo);
           todo.completed = !todo.completed;
 
           // UPDATE ITEM
@@ -136,13 +142,13 @@ $(function(){
 
         if(event.target.id === "removeTodo"){
           var view = this;
-          var todo =  _this.findModel(id);
+          var todo = _this.findModel(id);
           // DELETE ITEM
           _this.deleteItem(id, function(){
-            _this.removeModel(todo)
-            console.log(_this.models)
+            _this.removeModel(todo);
+            console.log(_this.models);
             $(view).remove();
-          })
+          });
         }
       });
     });
