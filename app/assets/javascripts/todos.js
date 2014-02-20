@@ -64,15 +64,16 @@ $(function(){
       return this;      
     };
 
-
     App.updateItem = function(item, callback){
-      // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      // -in this case the id is passed in as part of the full object, item (todo)
+      var data = { todo : item };
+      $.ajax({  url : this.urls.update.path + item.id + ".json",
+                type : this.urls.update.method,
+                data : data}).done(callback);
     };
 
     App.deleteItem = function(item, callback){
-      // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
       //  -and in this case, item is id. (passed in as such from removeTodo click event)
       $.ajax({  url : this.urls.destroy.path + item + ".json",
