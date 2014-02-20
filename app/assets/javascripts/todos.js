@@ -68,12 +68,21 @@ $(function(){
     App.updateItem = function(item, callback){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      var data = {todo: item};
+      $.ajax({ url: this.urls.update.path + item.id,
+               type: this.urls.update.method,
+               data: data}).done(callback);
+      return this;
     };
 
     App.deleteItem = function(item, callback){
     	// DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
+      var data = {todo: item};
+      $.ajax({ url: this.urls.destroy.path + item,
+               type: this.urls.destroy.method,
+               data: data}).done(callback);
+      return this;
       callback();
     };
     
@@ -138,6 +147,7 @@ $(function(){
           var view = this;
           var todo =  _this.findModel(id);
           // DELETE ITEM
+          // changed _this.deleteItem(id, function() below
           _this.deleteItem(id, function(){
             _this.removeModel(todo)
             console.log(_this.models)
