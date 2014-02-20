@@ -74,6 +74,12 @@ $(function(){
     App.deleteItem = function(item, callback){
     	// DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
+   
+      var data = { todo : item };
+      $.ajax({ url : this.urls.destroy.path,
+               type : this.urls.destroy.method,
+               data : data}).done(callback);
+      return this;      
       callback();
     };
     
