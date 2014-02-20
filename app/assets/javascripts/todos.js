@@ -66,14 +66,17 @@ $(function(){
 
 
     App.updateItem = function(item, callback){
-      $.ajax({url: this.urls.update.path+this.$el.attr("data-id"),
-              type: this.urls.update.method
+      var data = { todo : item };
+      $.ajax({url: this.urls.update.path+data.todo.id,
+              type: this.urls.update.method,
+              data: data
             }).done(callback);
       return this;
     };
 
     App.deleteItem = function(item, callback){
-      $.ajax({url: this.urls.destroy.path+this.$el.attr("data-id"),
+      var data = { todo : item };
+      $.ajax({url: this.urls.destroy.path+ data.todo,
               type: this.urls.destroy.method
               }).done(callback);
       return this;

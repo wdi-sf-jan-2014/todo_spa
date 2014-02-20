@@ -27,7 +27,7 @@ class TodosController < ApplicationController
 
   # Fill in update
   def update
-    new_params = params.permit(:completed)
+    new_params = params.require(:todo).permit(:id, :completed)
     @todo = Todo.find(params[:id])
     @todo.update_attributes(new_params)
     respond_to do |f|
