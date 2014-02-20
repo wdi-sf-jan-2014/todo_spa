@@ -18,8 +18,10 @@ class TodosController < ApplicationController
 
   # Fill in destroy
   def destroy
+    todo = Todo.find(params[:id])
+    todo.destroy
     respond_to do |f|
-      puts("************* reaching delete json request.")
+      f.json {render :json => {}, status: 200}
     end
   end
 

@@ -74,7 +74,10 @@ $(function(){
     App.deleteItem = function(item, callback){
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      //  -and in this case, item is id. (passed in as such from removeTodo click event)
+      $.ajax({  url : this.urls.destroy.path + item + ".json",
+                type : this.urls.destroy.method,
+              }).done(callback);
     };
     
     App.models = todos;
