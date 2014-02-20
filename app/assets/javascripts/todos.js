@@ -70,7 +70,7 @@ $(function(){
     // DO SOMETHING HERE
     // NOTE: For the url, an id for the item must be added to the path
     var data = { todo : item };
-     $.ajax({ url : this.urls.update.path+item.id,
+     $.ajax({ url : this.urls.update.path+item.id+'.json',
               type : this.urls.update.method,
               data : data}).done(callback);
     return this;  
