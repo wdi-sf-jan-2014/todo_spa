@@ -66,15 +66,22 @@ $(function(){
 
 
     App.updateItem = function(item, callback){
+      $.ajax({url : this.urls.index.path+item.id,
+              type : this.urls.update.method}).done(callback);
+      return this;
       // DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      // callback();
     };
 
     App.deleteItem = function(item, callback){
+      $ajax({url : this.urls.index.path+item,
+             type : this.urls.destroy.method}).done(callback);
+      return this;
+      });
     	// DO SOMETHING HERE
       // NOTE: For the url, an id for the item must be added to the path
-      callback();
+      // callback();
     };
     
    	App.models = todos;
@@ -139,10 +146,10 @@ $(function(){
           var todo =  _this.findModel(id);
           // DELETE ITEM
           _this.deleteItem(id, function(){
-            _this.removeModel(todo)
+            _this.removeModel(todo);
             console.log(_this.models)
             $(view).remove();
-          })
+          });
         }
       });
     });
