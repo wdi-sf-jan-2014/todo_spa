@@ -45,7 +45,16 @@ describe('Todo App', function() {
 
   describe('removing an existing todo', function() {
     it('should remove the item from the list of todos', function () {
-      pending();
+      it('should show up in the list of todos', function() {
+      spyOn($, 'ajax').and.callFake(function (req) {
+          var d = $.Deferred();
+          d.resolve(createdTodo);
+          return d.promise();
+      });
+
+      $('#removeTodo').click();
+
+      expect($('#todos')).not.toContain($.this.val);
     });
   });
 
@@ -55,3 +64,4 @@ describe('Todo App', function() {
     });
   });
 });
+  });
