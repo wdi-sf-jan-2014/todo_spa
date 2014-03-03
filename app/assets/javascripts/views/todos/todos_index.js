@@ -4,8 +4,7 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
   template: HandlebarsTemplates['todos/index'],
 
   events: {
-    'submit #addTodo':                'addTodo',
-    'click input[type="checkbox"]':   'complete'
+    'submit #addTodo':                'addTodo'
   },
 
   initialize: function() {
@@ -55,32 +54,8 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
       });
   },
 
-  complete: function(event) {
-  }, 
-
   // this function may be refactored further if we make subviews
   removeOrCheckTodo: function(event) {
-    var _this = event.currentTarget;
-    var id = _this.dataset.id;
-
-    if (event.target.id === "todo_completed") {
-      var checkbox = event.target;
-
-      var updated_todo = {};
-      updated_todo.completed = checkbox.checked;
-      updated_todo.id = id;
-
-      // Let's write a update request
-      $.ajax({
-        type: 'patch',
-        url: '/todos/' + updated_todo.id + '.json',
-        data: {
-          todo: updated_todo
-        }
-      }).done(function (data) {
-        $(_this).toggleClass("done-true");
-      });
-    }
     if (event.target.id === "removeTodo") {
       _this = event.currentTarget;
 
