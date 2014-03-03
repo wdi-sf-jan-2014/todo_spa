@@ -52,20 +52,5 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
         var todoHTML = HandlebarsTemplates['todos/show'](data);
         $("#todos").append(todoHTML);
       });
-  },
-
-  // this function may be refactored further if we make subviews
-  removeOrCheckTodo: function(event) {
-    if (event.target.id === "removeTodo") {
-      _this = event.currentTarget;
-
-      $.ajax({
-        type: 'delete',
-        url: '/todos/' + id
-      })
-        .done(function (data) {
-          $(_this).remove();
-        });
-    }
   }
 });
