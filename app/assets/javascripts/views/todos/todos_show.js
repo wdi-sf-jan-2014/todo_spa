@@ -37,7 +37,6 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
     });
   },
 
-  // this function may be refactored further if we make subviews
   remove: function(event) {
     $.ajax({
       context: this,

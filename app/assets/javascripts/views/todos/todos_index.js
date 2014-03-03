@@ -4,11 +4,7 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
   template: HandlebarsTemplates['todos/index'],
 
   events: {
-    'submit #addTodo':                'addTodo'
-  },
-
-  initialize: function() {
-    this._todoViews = [];
+    'submit #addTodo':                'add'
   },
 
   render: function() {
@@ -17,31 +13,28 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     var todoView;
     _.each(this.collection, function (someTodo) {
       todoView = new SpaApp.Views.TodosShow({ model: someTodo} );
-      this._todoViews.push(todoView.render());
-      this.$el.append(todoView.el);
+      this.$el.append(todoView.render().el);
     }, this);
 
     return this;
   },
 
-  addTodo: function(event) {
-    // canceling the event on the page
+  add: function(event) {
     event.preventDefault();
     
-    // create a newTodo using the
-    //  todo_title out of the form
-    //  and setting completed 
-    //  false
     var newTodo = {
       title: $("#todo_title").val(),
       completed: false
     };
 
-    $.post('/todos.json', {
-      todo: newTodo
-    }).done(function (data) {
-      var todoHTML = HandlebarsTemplates['todos/show'](data);
-      $("#todos").append(todoHTML);
+    $.ajax({
+      type: "POST",
+      url: '/todos.json',
+      context: this,
+      data: {todo: newTodo}
+    }).done(function (todo) {
+      var todoView = new SpaApp.Views.TodosShow({ model: todo });
+      this.$el.append(todoView.render().el);
     });
   }
 });
