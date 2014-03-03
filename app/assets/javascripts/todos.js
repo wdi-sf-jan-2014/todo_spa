@@ -46,7 +46,7 @@ $(function () {
       updated_todo.completed = checkbox.checked;
       updated_todo.id = this.dataset.id;
 
-      // Let's write a update request
+      // Let's write an update request
       $.ajax({
         type: 'patch',
         url: '/todos/' + updated_todo.id + '.json',

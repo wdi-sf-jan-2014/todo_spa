@@ -10,7 +10,7 @@ describe "Todos" do
  
   describe "GET /todos" do
     it "should be successful" do
-      get todos_path
+      get "/todos"
       response.status.should == 200
     end
   end
