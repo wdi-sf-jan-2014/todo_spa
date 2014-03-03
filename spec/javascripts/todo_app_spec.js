@@ -42,4 +42,16 @@ describe('Todo App', function() {
       expect($('#todos')).toContainText('new todo item');
     });
   });
+
+  describe('removing an existing todo', function() {
+    it('should remove the item from the list of todos', function () {
+      pending();
+    });
+  });
+
+  describe('checking off a todo item', function() {
+    it('should mark that item as completed', function() {
+      pending();
+    });
+  });
 });
