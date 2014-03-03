@@ -25,11 +25,8 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
   },
 
   addTodo: function(event) {
-    // Callback on form submit
-
     // canceling the event on the page
     event.preventDefault();
-    console.log("Form submitted");
     
     // create a newTodo using the
     //  todo_title out of the form
@@ -40,17 +37,11 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
       completed: false
     };
 
-    // log the newTodo in console
-    console.log(newTodo);
-
-    // Saved         
     $.post('/todos.json', {
       todo: newTodo
-    })
-      .done(function (data) {
-        console.log(data);
-        var todoHTML = HandlebarsTemplates['todos/show'](data);
-        $("#todos").append(todoHTML);
-      });
+    }).done(function (data) {
+      var todoHTML = HandlebarsTemplates['todos/show'](data);
+      $("#todos").append(todoHTML);
+    });
   }
 });

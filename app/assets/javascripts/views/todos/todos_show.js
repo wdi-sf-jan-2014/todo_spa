@@ -44,7 +44,7 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
       type: 'delete',
       url: '/todos/' + this.model.id
     }).done(function (data) {
-      this.remove();
+      $(this.el).remove();
     });
   }
 
