@@ -24,7 +24,7 @@
             // Saved         
             $.post('/todos.json', {todo: newTodo})
                 .done(function(data){
-                    console.log(data)
+                    console.log(data);
                     var todoHTML = HandlebarsTemplates.todo(data);
                     $("#todos").append(todoHTML);
                 });
