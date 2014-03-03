@@ -4,16 +4,22 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
   template: HandlebarsTemplates['todos/index'],
 
   events: {
-    'submit #addTodo':        'addTodo',
-    'click .todo':            'removeOrCheckTodo' // this may be refactored further
+    'submit #addTodo':                'addTodo',
+    'click input[type="checkbox"]':   'complete'
+  },
+
+  initialize: function() {
+    this._todoViews = [];
   },
 
   render: function() {
     $(this.el).html(this.template());
 
+    var todoView;
     _.each(this.collection, function (someTodo) {
-      var todoHTML = HandlebarsTemplates['todos/show'](someTodo);
-      this.$el.append(todoHTML);
+      todoView = new SpaApp.Views.TodosShow({ model: someTodo} );
+      this._todoViews.push(todoView.render());
+      this.$el.append(todoView.el);
     }, this);
 
     return this;
@@ -48,6 +54,9 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
         $("#todos").append(todoHTML);
       });
   },
+
+  complete: function(event) {
+  }, 
 
   // this function may be refactored further if we make subviews
   removeOrCheckTodo: function(event) {
