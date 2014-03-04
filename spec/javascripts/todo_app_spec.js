@@ -1,9 +1,10 @@
 describe('Todo App', function() {
-  var todos, createdTodo;
+  var todos, createdTodo, removedTodo;
   beforeEach(function (){
     // load data fixture
     todos = getJSONFixture('todos.json');
     createdTodo = getJSONFixture('todo_create_result.json');
+    removedTodo = getJSONFixture('todo_create_result.json');
 
     // load container html fixture
     appendSetFixtures('<div id="container"></div>');
@@ -45,13 +46,25 @@ describe('Todo App', function() {
 
   describe('removing an existing todo', function() {
     it('should remove the item from the list of todos', function () {
-      pending();
+      spyOn($, 'ajax').and.callFake(function (req) {
+          var d = $.Deferred();
+          d.resolve(removedTodo);
+          return d.promise();
+      });
+
+      $('#todo_title').val('new todo item');
+      $('#addTodo').submit();
+     //HOW TO SPECIFY $('#removeTodo').click();
+
+      expect($('#todos')).not.toContainText('new todo item');
+
     });
   });
 
   describe('checking off a todo item', function() {
     it('should mark that item as completed', function() {
-      pending();
+
+      expect($EL.CLASS).toEqual(.'done done-true');
     });
   });
 });
