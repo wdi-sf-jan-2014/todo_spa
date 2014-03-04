@@ -21,6 +21,7 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
 
   create: function(event) {
     event.preventDefault();
+    
     var newTodo = {
       title: $("#todo_title").val(),
       completed: false
@@ -30,10 +31,11 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     $.ajax({
       type: "POST",
       url: '/todos.json',
-      data: {todo: newTodo}
+      data: {todo: newTodo},
+      context: this
     }).done(function (atodo) {
-      // todoView = new SpaApp.Views.TodosShow({ model: atodo });
-      // this.$el.append($('atodo'));
+      todoView = new SpaApp.Views.TodosShow({ model: atodo });
+      this.$el.append($('atodo'));
     });
     return this;
   }
