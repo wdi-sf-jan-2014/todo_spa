@@ -20,6 +20,7 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
   },
 
   add: function(event) {
+    var _this = this;
     event.preventDefault();
     
     var newTodo = {
@@ -34,7 +35,7 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
       data: {todo: newTodo}
     }).done(function (todo) {
       var todoView = new SpaApp.Views.TodosShow({ model: todo });
-      this.$el.append(todoView.render().el);
+      _this.$el.append(todoView.render().el);
     });
   }
 });
