@@ -1,7 +1,8 @@
-// Wait for document.ready or window.onload 
+// Wait for document.ready or window.onload
 $(function () {
 
   // listen for sumbit on #addTodo
+  // Located in index.hbs
   $("#addTodo").on("submit", function (event) {
     // Callback on form submit
 
@@ -11,7 +12,7 @@ $(function () {
 
     // create a newTodo using the
     //  todo_title out of the form
-    //  and setting completed 
+    //  and setting completed
     //  false
     var newTodo = {
       title: $("#todo_title").val(),
@@ -21,13 +22,15 @@ $(function () {
     // log the newTodo in console
     console.log(newTodo);
 
-    // Saved         
+    // Saved
     $.post('/todos.json', {
       todo: newTodo
     })
       .done(function (data) {
         console.log(data);
+        // Doest following hbs need to be pointed at todos/show, like in todos_index?
         var todoHTML = HandlebarsTemplates.todo(data);
+        // Where the hell is #todos?
         $("#todos").append(todoHTML);
       });
 
