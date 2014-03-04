@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20140304181424) do
     t.boolean  "completed",   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "description"
+    t.text     "description", default: ""
   end
 
 end
