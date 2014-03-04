@@ -4,7 +4,7 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
   template: HandlebarsTemplates['todos/index'],
 
   events: {
-    'submit #addTodo': 'create',
+    'submit #addTodo': 'create'
   },
 
   render: function() {
@@ -25,6 +25,7 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
 
   //the callback function should make the post
   create: function()  {
+    var _this = this;
     event.preventDefault();
     //create a new todo
     var newTodo = {
@@ -35,8 +36,13 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     $.ajax({
       url: '/todos.json',
       type: 'post',
-      data: { todo: newTodo},
+      data: {todo: newTodo},
       context: this
+    }).done(function(data){
+      var show = new SpaApp.Views.TodosShow({ model: data });
+      show.render();
+      // why does THIS this need to have _this.el?
+      $(_this.el).append(show.el);
     });
   },
 

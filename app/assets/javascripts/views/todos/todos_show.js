@@ -17,13 +17,15 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
   },
 
   toggleComplete: function()  {
-    var _this = this;
 
-    if(this.model.completed){
-      this.model.completed = false;
-    }else{
-      this.model.completed = true;
-    }
+    // if(this.model.completed){
+    //   this.model.completed = false;
+    // }else{
+    //   this.model.completed = true;
+    // }
+
+    var checkbox = event.target;
+    this.model.completed = checkbox.checked;
 
     $.ajax({
       url: '/todos/'+this.model.id+ '.json',
