@@ -2,7 +2,7 @@ class TodosController < ApplicationController
   def index
     @todos = Todo.all
     respond_to do |f|
-      f.json { render :json => @todos, only: [:id, :title, :completed]}
+      f.json { render :json => @todos, only: [:id, :title, :completed, :description]}
     end
   end
 
@@ -33,5 +33,10 @@ class TodosController < ApplicationController
     respond_to do |f|
       f.json {render json: {}, status: 200}
     end
+  end
+
+  def show
+    @todo = Todo.find(params[:id])
+    render :json => @todo, only: [:id, :title, :completed, :description]
   end
 end
