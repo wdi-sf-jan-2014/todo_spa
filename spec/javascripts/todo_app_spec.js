@@ -1,5 +1,5 @@
 describe('Todo App', function() {
-  var todos, createdTodo;
+  var todos, createdTodo, updatedTodo, deletedTodo;
   beforeEach(function (){
     // load data fixture
     todos = getJSONFixture('todos.json');
@@ -51,7 +51,12 @@ describe('Todo App', function() {
 
   describe('checking off a todo item', function() {
     it('should mark that item as completed', function() {
-      pending();
+      spyOn($, 'ajax').and.callFake(function (req) {
+          var d = $.Deferred();
+          d.resolve(updatedTodo);
+          return d.promise();
+      });
+
     });
   });
 });
