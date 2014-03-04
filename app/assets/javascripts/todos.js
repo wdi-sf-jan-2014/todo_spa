@@ -1,4 +1,4 @@
-// Wait for document.ready or window.onload 
+// Wait for document.ready or window.onload
 $(function () {
 
   // listen for sumbit on #addTodo
@@ -11,7 +11,7 @@ $(function () {
 
     // create a newTodo using the
     //  todo_title out of the form
-    //  and setting completed 
+    //  and setting completed
     //  false
     var newTodo = {
       title: $("#todo_title").val(),
@@ -21,7 +21,7 @@ $(function () {
     // log the newTodo in console
     console.log(newTodo);
 
-    // Saved         
+    // Saved
     $.post('/todos.json', {
       todo: newTodo
     })

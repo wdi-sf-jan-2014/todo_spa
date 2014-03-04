@@ -29,7 +29,7 @@ describe('Todo App', function() {
   });
 
   describe('adding a new todo', function() {
-    it('should show up in the list of todos', function() {
+    it('should show 3n the list of todos', function() {
       spyOn($, 'ajax').and.callFake(function (req) {
           var d = $.Deferred();
           d.resolve(createdTodo);
