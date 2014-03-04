@@ -11,10 +11,16 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     $(this.el).html(this.template());
 
     var todoView;
-    _.each(this.collection, function (someTodo) {
+    _.each(
+
+      this.collection, 
+
+      function (someTodo) {
       todoView = new SpaApp.Views.TodosShow({ model: someTodo} );
       this.$el.append(todoView.render().el);
-    }, this);
+      }, 
+
+      this);
 
     return this;
   },
