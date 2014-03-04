@@ -22,6 +22,7 @@ window.SpaApp = {
       // initialize the index view with the fetched data
       var view = new SpaApp.Views.TodosIndex({ collection: data });
       $('#container').html(view.render().el);
+
     });
 
   }

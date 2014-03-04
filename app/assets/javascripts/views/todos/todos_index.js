@@ -11,10 +11,12 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     // renders the add_form template and appends to our view
     $(this.el).html(this.template());
 
-    // looping through each element in our collection
     _.each(this.collection, function (someTodo) {
-      var todoHTML = HandlebarsTemplates['todos/show'](someTodo);
-      this.$el.append(todoHTML);
+
+    var show = new SpaApp.Views.TodosShow({ model: someTodo });
+    this.$el.append(show.render().el);
+
+
     }, this); //final "this" defines the scope of the function
 
     return this;
@@ -22,14 +24,18 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
 
   //the callback function should make the post
   create: function()  {
+    event.preventDefault();
     //create a new todo
     var newTodo = {
       title: $("#todo_title").val(),
       completed: false
     };
     //add our todo to the DB
-    $.post('/todos.json', {
-      todo: newTodo
+    $.ajax({
+      url: '/todos.json',
+      type: 'post',
+      data: { todo: newTodo},
+      context: this
     });
   },
 
