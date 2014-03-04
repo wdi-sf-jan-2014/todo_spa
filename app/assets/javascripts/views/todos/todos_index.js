@@ -13,8 +13,9 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
 
     _.each(this.collection, function (someTodo) {
 
-    var show = new SpaApp.Views.TodosShow({ model: someTodo });
-    this.$el.append(show.render().el);
+      var show = new SpaApp.Views.TodosShow({ model: someTodo });
+      show.render();
+      this.$el.append(show.el);
 
 
     }, this); //final "this" defines the scope of the function
