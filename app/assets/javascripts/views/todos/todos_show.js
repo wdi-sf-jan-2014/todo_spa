@@ -11,12 +11,12 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
 
   events: {
     'click input[type="checkbox"]':   'complete',
-    'click .removeTodo':              'removeTodo'
+    'click .removeTodo':              'removeTodo',
+    'click .descriptor':              'description'
   },
 
   render: function() {
     $(this.el).html(this.template(this.model));
-
     return this;
   },
 
@@ -45,6 +45,14 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
     }).done(function (data) {
       this.remove();
     });
+  },
+
+  description: function(event) {
+      // SpaApp.router.navigate("", {trigger: true});
+     // var description = HandlebarsTemplates['todos/description'](this.model);
+      SpaApp.router.navigate("#todos/"+this.model.id, {trigger: true});
+      // $("#description_"+this.model.id).slideToggle();
   }
+  
 
 });

@@ -1,5 +1,5 @@
 SpaApp.Views.TodosIndex = Backbone.View.extend({
-  id: 'todos',
+  id: 'todo s',
 
   template: HandlebarsTemplates['todos/index'],
 
@@ -24,7 +24,8 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     
     var newTodo = {
       title: $("#todo_title").val(),
-      completed: false
+      completed: false,
+      description: $("#todo_description").val()
     };
 
     $.ajax({
