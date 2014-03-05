@@ -2,7 +2,7 @@ SpaApp.Routers.Main = Backbone.Router.extend({
 
   routes: {
     "": "home",
-    "/todos/:id": "show"
+    "/todos/:id": "description"
   },
 
   home: function(){
@@ -11,7 +11,14 @@ SpaApp.Routers.Main = Backbone.Router.extend({
       var view = new SpaApp.Views.TodosIndex({ collection: data });
       $('#container').html(view.render().el);
     });
+  },
+
+  description: function(someTodo){
+    $.get("/todos/"+ someTodo.id).done(function (data) {
+    var view = new SpaApp.Views.TodosDescription({model: data});
+    });
   }
 
 });
+
 
