@@ -17,3 +17,14 @@ window.SpaApp = {
 $(document).ready(function(){
   SpaApp.initialize();
 });
+
+SpaApp.Routers.Main = Backbone.Router.extend({
+  routes: {
+    "/details/:description": "showDescription",
+    "*other": "defaultRoute"
+  },
+
+  showDescription: function(desc) {
+    this.navigate("/details/" + desc)
+  }
+});

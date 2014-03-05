@@ -48,3 +48,17 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
   }
 
 });
+
+
+SpaApp.Views.TodosDetails = new Backbone.View.extend({
+
+  template: "<p><%=this.model.description%></p>",
+
+  id: "description" + this.model.id,
+
+  render: {
+    this.$el.html(template(this.model));
+    return this;
+  }
+
+});
