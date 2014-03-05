@@ -13,7 +13,8 @@ SpaApp.Routers.Main = Backbone.Router.extend({
   },
 
   getDescription: function(id){
-    this.$el.append(todoDescription.render().el);
+    var view = new SpaApp.Views.TodosDescription({model: id});
+    this.$el.append(view.render().el);
   }
 
 });
