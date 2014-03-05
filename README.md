@@ -3,78 +3,14 @@
 [todo_spa](http://wdi-sf-jan-2014.github.io/todo_spa/)
 
 # SPA App
-## Lesson Discussion
 
+We've come to the point in our single page app where we want to have multiple views, and we want them to work well.  I've added a `description` field to the todo table, and I want you to create a todo detail view which shows the description of one item in the list.  There are many ways to implement this.  Here are a couple possibilities:
 
+* Render the todo list, and render the detailed view of one todo to the right of the list.
+* Render the todo list with that specific todo opened up, pushing the rest of the list down.
+* Just render that todo with a link to go back to the list.
 
-## A Note This
-
-### AFTER
-    var App = {
-      msg:"hello world!", 
-      logMsg: function(){
-        console.log(this);
-        console.log(this.msg)
-      }, 
-      Views: {
-        msg: "Best App, sorta", 
-        logMsg: App.logMsg
-      }
-    };
-
-
-    App.Views.logMsg()
-
-### BEFORE
-
-  var App = {}
-
-  App.msg = "Hello, World!";
-
-  App.logMsg = function(){
-     console.log(this);
-     console.log(this.msg) 
-  }
-  App.Views = {msg: "Best App, sorta"};
-
-  App.Views.logMsg = App.logMsg;
-
-  App.Views.logMsg()
-
-
-## SPA APP
-
-First,
-
-  rails g controller todos index --no-test-framework
- 
-
-We neeed to work with the `todo.js` and the `todos/index.html.erb`
-
-
-`todos/index.html.erb`
-    
-    <div id="testCon">
-    </div>
-    
-
-All template information:
-`./templates/test.hbs`
-    <div>
-     {{ msg }}
-    </div>
-
-All application logic:
-`/todos.js`
-
-    $(function(){
-        var testObj = {msg: "Hello, world!"};
-        var $myTest = $(HandlebarsTemplates.test(testObj));
-        
-          $("#testCon").append($myTest);
-    });
-    
-
+If you click into a specific todo from the list, then go back using the browser button, it should bring you back to the list.  If you go to a specific todo from the list and refresh the page, it should remain at the same view.
 
 
 
