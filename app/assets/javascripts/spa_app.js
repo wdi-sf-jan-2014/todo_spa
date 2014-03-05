@@ -18,13 +18,14 @@ $(document).ready(function(){
   SpaApp.initialize();
 });
 
-SpaApp.Routers.Main = Backbone.Router.extend({
+SpaApp.Router.Main = Backbone.Router.extend({
 routes: {
 "(/:param)": "description"
   },
   description: function(param){
     var view = new App.Views.Other({model: param});
-    $('#main').html(view.render().$el);
+    $('#container').html(view.render().$el);
     }
 });
+
 
