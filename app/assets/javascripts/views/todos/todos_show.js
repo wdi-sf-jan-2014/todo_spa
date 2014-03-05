@@ -51,10 +51,6 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
   description: function(event) {
     event.preventDefault();
     SpaApp.router.navigate(event.target.pathname, {trigger: true});
-    //SpaApp.data.mainRouter.navigate("todos/" + this.model.id, {trigger: true});
-    // $.get("/todos/"+ this.model.id).done(function (data) {
-    // var view = new SpaApp.Views.TodosDescription({model: data});
-    // });
   }
 
 });

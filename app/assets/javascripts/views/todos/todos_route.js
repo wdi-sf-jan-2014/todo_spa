@@ -16,7 +16,7 @@ SpaApp.Routers.Main = Backbone.Router.extend({
   description: function(someTodo){
     $.get("/todos/"+ someTodo).done(function (data) {
     var view = new SpaApp.Views.TodosDescription({model: data});
-    $('#container').html(view.render().el);
+    $('#container').append(view.render().el);
     });
   }
 
