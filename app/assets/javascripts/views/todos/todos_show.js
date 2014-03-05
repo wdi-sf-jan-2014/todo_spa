@@ -11,7 +11,8 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
 
   events: {
     'click input[type="checkbox"]':   'complete',
-    'click .removeTodo':              'removeTodo'
+    'click .removeTodo':              'removeTodo',
+    'click a':             'description' 
   },
 
   render: function() {
@@ -45,6 +46,13 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
     }).done(function (data) {
       this.remove();
     });
+  },
+
+  description: function() {
+    event.preventDefault();
+    var path = event.target.pathname;
+    App.router.navigate(path, {trigger: true});
+  
   }
 
 });
