@@ -22,10 +22,11 @@ SpaApp.Router.Main = Backbone.Router.extend({
 routes: {
 "(/:param)": "description"
   },
-  description: function(param){
-    var view = new App.Views.Other({model: param});
-    $('#container').html(view.render().$el);
-    }
-});
 
+  description_temp: HandlebarsTemplates['todos/description'],
+
+  description: function(param){
+  $(this.el).html(this.description_temp(this.model));
+  }
+});
 
