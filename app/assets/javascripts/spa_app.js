@@ -29,7 +29,8 @@ SpaApp.Routers.Main = Backbone.Router.extend({
     "*other": "defaultRoute"
   },
 
-  showDescription: function(desc) {
-    alert(desc);
+  showDescription: function(id) {
+    alert(id);
+    console.log(id);
   }
 });
