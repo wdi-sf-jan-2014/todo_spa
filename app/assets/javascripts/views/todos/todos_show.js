@@ -8,10 +8,11 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
   },
   
   template: HandlebarsTemplates['todos/show'],
+  description_template: "<p><%=this.model.description%></p>",
 
   events: {
     'click input[type="checkbox"]':   'complete',
-    'click .removeTodo':              'removeTodo'
+    'click .removeTodo':              'removeTodo',
   },
 
   render: function() {
@@ -50,15 +51,15 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
 });
 
 
-SpaApp.Views.TodosDetails = new Backbone.View.extend({
+// SpaApp.Views.TodosDetails = new Backbone.View.extend({
 
-  template: "<p><%=this.model.description%></p>",
+//   template: "<p><%=this.model.description%></p>",
 
-  id: "description" + this.model.id,
+//   id: "description" + this.model.id,
 
-  render: {
-    this.$el.html(template(this.model));
-    return this;
-  }
+//   render: {
+//     this.$el.html(template(this.model));
+//     return this;
+//   }
 
-});
+// });
