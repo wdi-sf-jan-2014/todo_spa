@@ -11,7 +11,7 @@ window.SpaApp = {
   },
 
   start: function(){
-    this.router = new this.Routers.Main();
+    SpaApp.router = new this.Routers.Main();
     Backbone.history.start({pushState: true});
   }
 };
