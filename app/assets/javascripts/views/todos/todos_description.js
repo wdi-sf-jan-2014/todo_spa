@@ -1,14 +1,11 @@
 SpaApp.Views.Description = Backbone.View.extend({
-  className: 'todoDescription',
+  className: 'descrip',
 
-  events: {
-    'click .viewDesc': 'showDescription'
-  },
+  template: HandlebarsTemplates['todos/description'],
 
-  showDescription: function(event){
-    event.preventDefault();
-    console.log("test");
+  render: function(){
+    $(this.el).html(this.template(this.model));
+    return this;
   }
-
 
 });

@@ -47,11 +47,11 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
     });
   },
 
-  showDescription: function(description) {
+  showDescription: function() {
+    var description = this.model;
     SpaApp.router.navigate('todo/' + this.model.id);
     var todoDescription = new SpaApp.Views.Description( { model: description } );
     this.$el.append(todoDescription.render().el);
-    console.log(this);
   }
 
 });
