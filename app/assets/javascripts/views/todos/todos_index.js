@@ -21,7 +21,7 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
 
   add: function(event) {
     event.preventDefault();
-    
+
     var newTodo = {
       title: $("#todo_title").val(),
       completed: false

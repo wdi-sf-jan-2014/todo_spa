@@ -6,7 +6,7 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
       return 'done';
     }
   },
-  
+
   template: HandlebarsTemplates['todos/show'],
 
   events: {
