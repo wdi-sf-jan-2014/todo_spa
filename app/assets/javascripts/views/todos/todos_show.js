@@ -50,7 +50,8 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
 
   displayTodo: function(event) {
     event.preventDefault();
-    SpaApp.router.navigate('#display', {trigger: true});
+    var id = event.target.id;
+    SpaApp.router.navigate('#display/' + id, {trigger: true});
   }
 
 });

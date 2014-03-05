@@ -1,5 +1,6 @@
 SpaApp.Views.TodosDisplay = Backbone.View.extend({
   tagname: 'div',
+
   events: {
     "click a": "linkClicked"
   },
@@ -7,7 +8,7 @@ SpaApp.Views.TodosDisplay = Backbone.View.extend({
   template: HandlebarsTemplates['todos/display'],
 
   render: function(model) {
-    this.$el.html(this.template());
+    this.$el.html(this.template(this.model));
     return this;
   },
 
@@ -16,5 +17,4 @@ SpaApp.Views.TodosDisplay = Backbone.View.extend({
     var path = event.target.pathname;
     SpaApp.router.navigate(path, {trigger: true});
   }
-
 });
