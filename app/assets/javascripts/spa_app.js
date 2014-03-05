@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 SpaApp.Routers.Main = Backbone.Router.extend({
   routes: {
-    "/details/:description": "showDescription",
+    "details/:id": "showDescription",
     "*other": "defaultRoute"
   },
 
