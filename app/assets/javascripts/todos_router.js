@@ -1,3 +1,3 @@
-SpaApp.Routers.Main = Backbone.Router.Extend({
+SpaApp.Routers.Main = Backbone.Router.extend({
 
 });
