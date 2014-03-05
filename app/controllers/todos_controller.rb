@@ -37,6 +37,9 @@ class TodosController < ApplicationController
 
   def show
     @todo = Todo.find(params[:id])
-    render :json => @todo, only: [:id, :title, :completed, :description]
+    respond_to do |f|
+      f.html {render "main/index"}
+      f.json {render :json => @todo, only: [:id, :title, :completed, :description]}
+    end
   end
 end
