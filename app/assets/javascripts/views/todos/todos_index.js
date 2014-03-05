@@ -35,6 +35,8 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     }).done(function (todo) {
       var todoView = new SpaApp.Views.TodosShow({ model: todo });
       this.$el.append(todoView.render().el);
+      // clear out the text box
+      $("#todo_title").val('');
     });
   }
 });
