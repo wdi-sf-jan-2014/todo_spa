@@ -6,12 +6,15 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
       return 'done';
     }
   },
-  
+  id: function() {
+    return 'todo-' + this.model.id;
+  },
   template: HandlebarsTemplates['todos/show'],
 
   events: {
     'click input[type="checkbox"]':   'complete',
-    'click .removeTodo':              'removeTodo'
+    'click .removeTodo':              'removeTodo',
+    'click .showDetail':              'showDetail'
   },
 
   render: function() {
@@ -22,7 +25,6 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
 
   complete: function(event) {
     var checkbox = event.target;
-
     this.model.completed = checkbox.checked;
 
     $.ajax({
@@ -45,6 +47,10 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
     }).done(function (data) {
       this.remove();
     });
+  },
+
+  showDetail: function(event) {
+    SpaApp.router.navigate('detail/' + this.model.id, {trigger: true});
   }
 
 });

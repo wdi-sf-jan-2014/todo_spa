@@ -7,13 +7,18 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     'submit #addTodo':                'add'
   },
 
-  render: function() {
+  render: function(id) {
     $(this.el).html(this.template());
 
     var todoView;
     _.each(this.collection, function (someTodo) {
-      todoView = new SpaApp.Views.TodosShow({ model: someTodo} );
-      this.$el.append(todoView.render().el);
+      todoView = new SpaApp.Views.TodosShow({model: someTodo});
+      var $todoEl = todoView.render().$el;
+      if (someTodo.id + '' === id){
+        todoView = new SpaApp.Views.TodosDetail({model: someTodo});
+        $todoEl.append(todoView.render().el);
+      }
+      this.$el.append($todoEl);
     }, this);
 
     return this;
