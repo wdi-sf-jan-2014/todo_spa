@@ -1,6 +1,7 @@
 SpaApp.Routers.Main = Backbone.Router.extend({
   routes: {
-    "": "main"
+    "": "main",
+    "display": "display"
   },
 
   main: function() {
@@ -12,5 +13,11 @@ SpaApp.Routers.Main = Backbone.Router.extend({
       var view = new SpaApp.Views.TodosIndex({ collection: data });
       $('#container').html(view.render().el);
     });
+  },
+
+  display: function(id) {
+    var aModel = {title: "Walk", description: "faster."};
+    var view = new SpaApp.Views.TodosDisplay({model: aModel});
+    $('#container').html(view.render().el);
   }
 });
