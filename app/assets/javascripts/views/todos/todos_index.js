@@ -27,14 +27,14 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
       completed: false
     };
 
-    $.ajax({
-      type: "POST",
-      url: '/todos.json',
-      context: this,
-      data: {todo: newTodo}
-    }).done(function (todo) {
-      var todoView = new SpaApp.Views.TodosShow({ model: todo });
-      this.$el.append(todoView.render().el);
+    var _this = this;
+
+    SpaApp.todos.create(newTodo, {
+      wait : true,
+      success: function (todoModel) {
+        var todoView = new SpaApp.Views.TodosShow({ model: todoModel });
+        _this.$el.append(todoView.render().el);
+      }
     });
   }
 });

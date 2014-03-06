@@ -24,28 +24,18 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
   complete: function(event) {
     var checkbox = event.target;
 
+    var _this = this;
     this.model.set('completed', checkbox.checked);
-
-    $.ajax({
-      context: this,
-      type: 'patch',
-      url: '/todos/' + this.model.get('id') + '.json',
-      data: {
-        todo: this.model.toJSON()
-      }
-    }).done(function (data) {
-      $(this.el).toggleClass("done-true");
-    });
+    this.model.save('completed', checkbox.checked, {success: function(data) {
+      $(_this.el).toggleClass("done-true");
+    }});
   },
 
   removeTodo: function(event) {
-    $.ajax({
-      context: this,
-      type: 'delete',
-      url: '/todos/' + this.model.get('id')
-    }).done(function (data) {
-      this.remove();
-    });
+    var _this = this;
+    this.model.destroy({context: this, success: function (data) {
+      _this.remove();
+    }});
   },
 
   linkClicked: function(event){

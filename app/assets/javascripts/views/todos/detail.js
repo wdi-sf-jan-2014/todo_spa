@@ -35,14 +35,7 @@ SpaApp.Views.TodosDetail = Backbone.View.extend({
   submit: function(changes){
     $.extend(this.model, changes);
     this.render();
-    $.ajax({
-      context: this,
-      type: 'patch',
-      url: '/todos/' + this.model.get('id') + '.json',
-      data: {
-        todo: this.model.toJSON()
-      }
-    });
+    this.model.save();
   },
   linkClicked: function(event){
     event.preventDefault();
