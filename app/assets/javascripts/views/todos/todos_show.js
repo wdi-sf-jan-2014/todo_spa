@@ -8,7 +8,6 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
   },
   
   template: HandlebarsTemplates['todos/show'],
-  description_template: "<p><%=this.model.description%></p>",
 
   events: {
     'click input[type="checkbox"]':   'complete',
@@ -51,21 +50,10 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
 
   showTodo: function(event) {
     event.preventDefault();
+    // if target was an href:
+    // var path = event.target.pathname
     SpaApp.router.navigate("details/"+this.model.id, {trigger: true});
   }
 
 });
 
-
-// SpaApp.Views.TodosDetails = new Backbone.View.extend({
-
-//   template: "<p><%=this.model.description%></p>",
-
-//   id: "description" + this.model.id,
-
-//   render: {
-//     this.$el.html(template(this.model));
-//     return this;
-//   }
-
-// });
