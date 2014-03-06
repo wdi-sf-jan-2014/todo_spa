@@ -4,8 +4,8 @@ window.SpaApp = {
   Views: {},
   Routers: {},
   initialize: function() {
-    // this code obviously belongs in a model or collection
-    // but, we're not talking about models or collections just yet :)
+    this.todos = new this.Collections.Todos();
+
     this.router = new this.Routers.Main();
     Backbone.history.start({pushState: true});
 
@@ -18,18 +18,19 @@ SpaApp.Routers.Main = Backbone.Router.extend({
   },
 
   index: function(){
-    $.get("/todos.json").done(function (data) {
+    SpaApp.todos.fetch({success: function (allData) {
       // initialize the index view with the fetched data
-      var view = new SpaApp.Views.TodosIndex({ collection: data });
+      var view = new SpaApp.Views.TodosIndex({collection: allData});
       $('#container').html(view.render().el);
-    });
+    }});
   },
   detail: function(id){
-    $.get("/todos/" + id + ".json").done(function (data) {
+    var todo = new SpaApp.Models.Todo({id : id});
+    todo.fetch({success: function (serverTodo) {
       // initialize the index view with the fetched data
-      var view = new SpaApp.Views.TodosDetail({model: data });
+      var view = new SpaApp.Views.TodosDetail({model: serverTodo});
       $('#container').html(view.render().el);
-    });
+    }});
   }
 });
 $(document).ready(function(){

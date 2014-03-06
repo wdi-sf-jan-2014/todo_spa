@@ -1,6 +1,6 @@
 SpaApp.Views.TodosShow = Backbone.View.extend({
   className: function() {
-    if (this.model.completed) {
+    if (this.model.get('completed')) {
       return 'done done-true';
     } else {
       return 'done';
@@ -16,7 +16,7 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
   },
 
   render: function() {
-    $(this.el).html(this.template(this.model));
+    $(this.el).html(this.template(this.model.toJSON()));
 
     return this;
   },
@@ -24,14 +24,14 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
   complete: function(event) {
     var checkbox = event.target;
 
-    this.model.completed = checkbox.checked;
+    this.model.set('completed', checkbox.checked);
 
     $.ajax({
       context: this,
       type: 'patch',
-      url: '/todos/' + this.model.id + '.json',
+      url: '/todos/' + this.model.get('id') + '.json',
       data: {
-        todo: this.model
+        todo: this.model.toJSON()
       }
     }).done(function (data) {
       $(this.el).toggleClass("done-true");
@@ -42,7 +42,7 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
     $.ajax({
       context: this,
       type: 'delete',
-      url: '/todos/' + this.model.id
+      url: '/todos/' + this.model.get('id')
     }).done(function (data) {
       this.remove();
     });

@@ -10,7 +10,7 @@ SpaApp.Views.TodosDetail = Backbone.View.extend({
   },
 
   render: function() {
-    $(this.el).html(this.template(this.model));
+    $(this.el).html(this.template(this.model.toJSON()));
     return this;
   },
 
@@ -38,9 +38,9 @@ SpaApp.Views.TodosDetail = Backbone.View.extend({
     $.ajax({
       context: this,
       type: 'patch',
-      url: '/todos/' + this.model.id + '.json',
+      url: '/todos/' + this.model.get('id') + '.json',
       data: {
-        todo: this.model
+        todo: this.model.toJSON()
       }
     });
   },
