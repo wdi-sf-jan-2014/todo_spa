@@ -1,5 +1,4 @@
 
-
 [todo_spa](http://wdi-sf-jan-2014.github.io/todo_spa/)
 
 # SPA App
@@ -10,7 +9,7 @@ Also, it's very possible to complete this assignment without responding to the m
 
 __HINT__ Look through all the javascript code provided.  There are some helpful pointers in the comments.
 
-__EXTRA HARD BONUS__  If you are a backbone wizard and this model stuff did not slow you down much, try changing the app so that a user can have many todo lists.  The user should be able to name to todo list, e.g., groceries, work, etc.  The user could then click on a tabbed interface to switch between different lists of todos.  This will require adding a new table to the rails db, handling nested resources on the backbone side and on the rails side, and also adds the ability to create a new todo list to the spa app.
+__EXTRA HARD BONUS__  If you are a backbone wizard and this model stuff did not slow you down much, try changing the app so that a user can have many todo lists.  The user should be able to name a todo list, e.g., groceries, work, etc.  The user could then click on a tabbed interface to switch between different lists of todos.  This will require adding a new table to the rails db, handling nested resources on the backbone side and on the rails side, and also adds the ability to create a new todo list to the spa app.
 
 
 
