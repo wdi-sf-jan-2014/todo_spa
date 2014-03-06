@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   def index
-    @todos = Todo.all
+    @todos = Todo.all.sort
     respond_to do |f|
       f.json { render :json => @todos, only: [:id, :title, :completed, :description]}
     end
@@ -26,6 +26,7 @@ class TodosController < ApplicationController
 
   # Fill in update
   def update
+
     updated_todo = params.require(:todo).permit(:completed, :title)
     todo = Todo.find(params[:id])
     todo.update_attributes(updated_todo)
