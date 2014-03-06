@@ -7,6 +7,9 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     'submit #addTodo':                'add'
   },
 
+  // TODO: Add an initialize function that connects your view to
+  // todo events.
+
   render: function() {
     $(this.el).html(this.template());
 

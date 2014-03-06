@@ -4,8 +4,8 @@ window.SpaApp = {
   Views: {},
   Routers: {},
   initialize: function() {
-    // this code obviously belongs in a model or collection
-    // but, we're not talking about models or collections just yet :)
+    this.todos = new this.Collections.Todos();
+    
     this.router = new this.Routers.Main();
     Backbone.history.start({pushState: true});
 
@@ -17,6 +17,8 @@ SpaApp.Routers.Main = Backbone.Router.extend({
     "(/)": "index",
   },
 
+  // TODO: have both of these functions handled by a model or the todos
+  // collection.  In other words, don't use jQuery ajax methods directly.
   index: function(){
     $.get("/todos.json").done(function (data) {
       // initialize the index view with the fetched data

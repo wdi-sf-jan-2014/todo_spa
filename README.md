@@ -4,16 +4,13 @@
 
 # SPA App
 
-We've come to the point in our single page app where we want to have multiple views, and we want them to work well.  I've added a `description` field to the todo table, and I want you to create a todo detail view which shows the description of one item in the list.  There are many ways to implement this.  Here are a couple possibilities:
+It's now time to add the final piece to our SPA, backbone models and collections.  Take a look at the code provided in the backbone_models_lab branch in the topa_spa repo linked above.  The goal of using models is to have the model take care of persisting and storing data.  Therefore, you should try to change the todo app code such that there are no more jQuery ajax type calls.
 
-* Render the todo list, and render the detailed view of one todo to the right of the list.
-* Render the todo list with that specific todo opened up, pushing the rest of the list down.
-* Just render that todo with a link to go back to the list.
+Also, it's very possible to complete this assignment without responding to the model events.  Complete the lab however you see fit, but if you finish early, try to use model events in the view.
 
-If you click into a specific todo from the list, then go back using the browser button, it should bring you back to the list.  If you go to a specific todo from the list and refresh the page, it should remain at the same view.
+__HINT__ Look through all the javascript code provided.  There are some helpful pointers in the comments.
 
-
-
+__EXTRA HARD BONUS__  If you are a backbone wizard and this model stuff did not slow you down much, try changing the app so that a user can have many todo lists.  The user should be able to name to todo list, e.g., groceries, work, etc.  The user could then click on a tabbed interface to switch between different lists of todos.  This will require adding a new table to the rails db, handling nested resources on the backbone side and on the rails side, and also adds the ability to create a new todo list to the spa app.
 
 
 

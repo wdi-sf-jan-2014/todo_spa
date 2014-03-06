@@ -7,6 +7,10 @@ SpaApp.Views.TodosShow = Backbone.View.extend({
     }
   },
   
+  // TODO: pay close attention in this file about what needs to change.
+  // Now that the model isn't a simple javascript object,
+  // this.model.completed no longer works for example.
+
   template: HandlebarsTemplates['todos/show'],
 
   events: {
