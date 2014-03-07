@@ -1,7 +1,8 @@
 SpaApp.Routers.Main = Backbone.Router.extend({
   routes: {
     "": "main",
-    "display/:id": "display"
+    "display/:id": "display",
+    "*other": "defaultRoute"
   },
 
   main: function() {
@@ -21,5 +22,9 @@ SpaApp.Routers.Main = Backbone.Router.extend({
       var view = new SpaApp.Views.TodosDisplay({ model: data });
       $('#container').html(view.render().el);
     });
+  },
+
+  defaultRoute: function() {
+    console.log('default');
   }
 });
