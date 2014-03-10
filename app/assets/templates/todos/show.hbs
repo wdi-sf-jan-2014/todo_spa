@@ -2,6 +2,7 @@
 <input type="checkbox" 
        {{#if completed}} checked {{/if}} 
        name="completed"> 
-{{title}}
+<a href = '/todos/{{id}}'>{{title}}</a>
 </label>
+
 <button class="removeTodo">delete</button>

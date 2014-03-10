@@ -19,6 +19,10 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     return this;
   },
 
+  addDetailView : function(id) {
+
+  }
+
   add: function(event) {
     event.preventDefault();
     
@@ -26,7 +30,7 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
       title: $("#todo_title").val(),
       completed: false
     };
-
+    
     $.ajax({
       type: "POST",
       url: '/todos.json',
